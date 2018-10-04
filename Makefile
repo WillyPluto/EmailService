@@ -1,6 +1,8 @@
+.PHONY: clean
 clean:
 	rm -rf dist
 
+.PHONY: build
 build: clean
 	mkdir dist
 	zip -r dist/code.zip emailer
@@ -12,6 +14,7 @@ build: clean
 		cd ../..
 	rm -rf dist/temp
 
+.PHONY: deploy
 deploy: build
 	aws s3 rm s3://trv-test-code-bucket --recursive
 	aws s3 cp dist s3://trv-test-code-bucket --recursive
